@@ -13,12 +13,13 @@ jobs:
       - name: Deploy to Server
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: 85.93.90.57
-          username: root
+          host: "85.93.90.57"
+          username: "root"
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            echo "Connected"
+            echo "CONNECTED SUCCESSFULLY"
             whoami
+            hostname
             cd /var/www/html/docker/test-deploy
             git pull origin main
