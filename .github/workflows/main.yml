@@ -1,23 +1,24 @@
 name: Test Deploy Pipeline
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-```
-steps:
-  - name: Deploy to Server
-    uses: appleboy/ssh-action@v1.0.0
-    with:
-      host: ${{ secrets.SERVER_IP }}
-      username: ${{ secrets.SERVER_USER }}
-      key: ${{ secrets.SSH_PRIVATE_KEY }}
-      script: |
-        cd /var/www/html/docker/test-deploy
-        git pull origin main
-```
+    steps:
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 85.93.90.57
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            echo "Connected"
+            whoami
+            cd /var/www/html/docker/test-deploy
+            git pull origin main
